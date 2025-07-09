@@ -69,7 +69,12 @@ struct DetailView: View {
                         
                         VStack(alignment: .leading) {
                             ForEach(artists.works, id: \.title) { works in
-                                ListView(works: works)
+                                NavigationLink {
+                                    ArtView(works: works)
+                                } label: {
+                                    ListView(works: works)
+                                }
+
                             }
                             .padding()
                         }

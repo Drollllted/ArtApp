@@ -8,17 +8,57 @@
 import SwiftUI
 
 struct ArtView: View {
+    
+    let works: Works
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 20) {
-                Image(systemName: "photo")
+                Image(works.image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 200)
+                    .cornerRadius(20)
+                    .foregroundStyle(.gray)
+                
+                Text("Information")
+                    .bold()
+                    .font(.system(size: 20))
+                    .foregroundStyle(.black)
+                
+                Text(works.info)
+                    .fontWeight(.medium)
+                    .font(.system(size: 18))
+                    .foregroundStyle(.gray)
+                    .lineLimit(20)
+                
+                Spacer()
+
             }
-            .navigationTitle("Title")
+            .padding()
+            
+            VStack(alignment: .center){
+                Button {
+                    
+                } label: {
+                    Text("Развидеть")
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                        .foregroundStyle(.black)
+                        .background{
+                            RoundedRectangle(cornerRadius: 40)
+                                .fill()
+                                .foregroundStyle(.blue)
+                                .frame(width: 400, height: 70)
+                        }
+                    
+                }
+                .padding()
+            }
+            .padding()
+            .navigationTitle(works.title)
             .toolbarTitleDisplayMode(.inline)
         }
     }
-}
-
-#Preview {
-    ArtView()
 }
