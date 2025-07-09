@@ -10,7 +10,7 @@ import SwiftUI
 struct ArtView: View {
     
     let works: Works
-    
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 20) {
@@ -39,26 +39,31 @@ struct ArtView: View {
             .padding()
             
             VStack(alignment: .center){
-                Button {
-                    
-                } label: {
-                    Text("Развидеть")
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
-                        .foregroundStyle(.black)
-                        .background{
-                            RoundedRectangle(cornerRadius: 40)
-                                .fill()
-                                .foregroundStyle(.blue)
-                                .frame(width: 400, height: 70)
-                        }
-                    
-                }
+                NavigationLink(destination: ShowView(works: works)) {
+                        Text("Развидеть")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .foregroundStyle(.black)
+                            .background{
+                                RoundedRectangle(cornerRadius: 40)
+                                    .fill()
+                                    .foregroundStyle(.blue)
+                                    .frame(width: 400, height: 70)
+                            }
+                    }
                 .padding()
             }
             .padding()
             .navigationTitle(works.title)
             .toolbarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    CustomBackView {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

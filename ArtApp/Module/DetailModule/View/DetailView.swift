@@ -88,21 +88,8 @@ struct DetailView: View {
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
+                    CustomBackView {
                         dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 10, height: 10)
-                            .foregroundStyle(.black)
-                            .background {
-                                Circle()
-                                    .fill(Color.white.opacity(0.4))
-                                    .stroke(Color.black, lineWidth: 1)
-                                    .frame(width: 30, height: 30)
-                            }
-                            .padding(10)
                     }
                 }
             }
