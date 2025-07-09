@@ -21,7 +21,7 @@ final class NetworkService {
             
             let jsonDecoder = JSONDecoder()
             let json = try jsonDecoder.decode(WelcomeJSON.self, from: data)
-            print(json)
+           // print(json)
             completion(.success(json))
         } catch {
             print(error.localizedDescription)

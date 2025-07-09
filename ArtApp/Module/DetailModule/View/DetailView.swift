@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct DetailView: View {
+    
+    let artists: Artists
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 15) {
                     ZStack(alignment: .topLeading) {
-                        Image(systemName: "photo")
+                        Image(artists.image)
                             .resizable()
                             .scaledToFill()
                             .frame(maxWidth: .infinity)
@@ -27,7 +31,7 @@ struct DetailView: View {
                             Spacer()
                             
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Name name")
+                                Text(artists.name)
                                     .font(.system(size: 20))
                                     .fontWeight(.medium)
                                     .foregroundStyle(.white)
@@ -51,7 +55,7 @@ struct DetailView: View {
                             .font(.system(size: 18))
                             .fontWeight(.semibold)
                         
-                        Text("LOREM LOREM LOREM LOREM LOREM LOREM LOREM LOREM LOREM")
+                        Text(artists.bio)
                             .font(.system(size: 18))
                             .fontWeight(.medium)
                             .foregroundStyle(.gray)
@@ -61,20 +65,42 @@ struct DetailView: View {
                         Text("Works")
                             .bold()
                             .font(.system(size: 18))
+                        
+                        
+                        VStack(alignment: .leading) {
+                            ForEach(artists.works, id: \.title) { works in
+                                ListView(works: works)
+                            }
+                            .padding()
+                        }
                     }
-                    .padding(.leading, 30)
+                    .padding(.leading, 25)
                     
                     Spacer()
                 }
             }
-            
             .edgesIgnoringSafeArea(.top)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 10, height: 10)
+                            .foregroundStyle(.black)
+                            .background {
+                                Circle()
+                                    .fill(Color.white.opacity(0.4))
+                                    .stroke(Color.black, lineWidth: 1)
+                                    .frame(width: 30, height: 30)
+                            }
+                            .padding(10)
+                    }
+                }
+            }
         }
-        .navigationBarHidden(true)
     }
-}
-
-
-#Preview{
-    DetailView()
 }

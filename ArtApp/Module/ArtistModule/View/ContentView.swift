@@ -33,9 +33,10 @@ struct ContentView: View {
                     
                     VStack(spacing: 16){
                         ForEach(vm.artists, id: \.name) { artists in
-                            NavigationLink(destination: DetailView()) {
+                            NavigationLink(destination: DetailView(artists: artists)) {
                                 ArtistsSectionView(artists: artists)
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
