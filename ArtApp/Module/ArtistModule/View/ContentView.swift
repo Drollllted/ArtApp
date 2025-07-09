@@ -13,7 +13,7 @@ struct ContentView: View {
     @State private var textFieldText: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     
@@ -33,15 +33,30 @@ struct ContentView: View {
                     
                     VStack(spacing: 16){
                         ForEach(vm.artists, id: \.name) { artists in
-                            ArtistsSectionView(artists: artists)
+                            NavigationLink(destination: DetailView()) {
+                                ArtistsSectionView(artists: artists)
+                            }
                         }
                     }
                 }
                 .padding()
             }
+            .navigationTitle("Artists")
+            .toolbar {
+                Button {
+                    print("32212313")
+                } label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(.black)
+                        .bold()
+                        .offset(y: 40)
+                }
+                
+            }
+            
         }
-        .navigationTitle("Artists")
-        .navigationBarTitleDisplayMode(.large)
         .onAppear{
             vm.fetchData()
         }
