@@ -44,15 +44,16 @@ struct ContentView: View {
             }
             .navigationTitle("Artists")
             .toolbar {
-                Button {
-                    print("32212313")
-                } label: {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(.black)
-                        .bold()
-                        .offset(y: 40)
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: AddArtistView()) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundStyle(.black)
+                            .bold()
+                            .offset(y: 40)
+                    }
                 }
                 
             }
